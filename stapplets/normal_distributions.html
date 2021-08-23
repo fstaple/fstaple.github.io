@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<!--
+    FSTAPLE
+    Free STatistics APpLEt
+
+    Public domain.
+    Free forever.
+-->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
+
+    <title>fstaple: Normal Distributions</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="flex-container">
+        <!-- header -->
+        <div class="flex-header center">
+            <h1>Normal Distributions</h1>
+            <a class="button" href="..">Go Back to Menu</a>
+        </div>
+        <!-- form -->
+        <div class="flex-header container">
+            <div class="row">
+                <div class="column">
+                    <p>
+                        Mean: <input type="text" placeholder="Enter your mean here..." id="mean">
+                        SD: <input type="text" placeholder="Enter your SD here..." id="sd">
+                        <a class="button button-outline" onclick="plot_distribution()">Plot Distribution</a>
+                    </p>
+                </div>
+                <div class="column">
+                    <p>
+                        Adding these later.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- body -->
+        <div class="flex-content">
+            <!-- chart -->
+            <div class="chart-container hw100">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"
+        integrity="sha256-bC3LCZCwKeehY6T4fFi9VfOU0gztUa+S4cnkIhVPZ5E=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"
+        integrity="sha256-GADF/umy5Gco3q38B6dzNk32Q34LSns5BNsU2dzC9Q4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../common.js"></script>
+    <script>
+        // distribution plotter
+        function plot_distribution() {
+            // get values
+            const mean = $("#mean").val();
+            const sd = $("#sd").val();
+            // check if they're numbers
+            if (!input_validate(mean) || !input_validate(sd)) {
+                // just alert the user and don't plot anything
+                alert("At least one of your inputs is not a number.");
+                return;
+            }
+            // make sure SD is positive to prevent site from freezing
+            else if (+sd <= 0) {
+                // alert the user and don't plot anything
+                alert("Your standard deviation must be positive.");
+                return;
+            }
+            // now we can plot the line chart
+            plot_line_chart(generate_normal_chart(+mean, +sd));
+        }
+    </script>
+</body>
+
+</html>

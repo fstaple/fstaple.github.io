@@ -1,0 +1,39 @@
+/* nice looking margins */
+body {
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+/* centering text */
+.center {
+    text-align: center;
+}
+
+/* flex display */
+.flex-container {
+    display: flex;
+    flex-flow: column;
+    height: 90vh;
+}
+
+.flex-header {
+    flex: 0 1 auto;
+}
+
+.flex-content {
+    flex: 1 1 auto;
+}
+
+/* chart display */
+.hw100 {
+    /* take up max space */
+    height: 100%;
+    width: 100%;
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+}
