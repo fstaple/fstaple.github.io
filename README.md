@@ -3,7 +3,7 @@
 
 fstaple (**F**ree **ST**atistics **AP**p**LE**ts) is a project to create a new, free version of stapplet from scratch.
 
-### [open fstaple](https://parabirb.github.io/fstaple)
+### [open fstaple](https://fstaple.github.io)
 ### [progress](progress.md)
 
 ## rationale
