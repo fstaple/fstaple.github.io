@@ -15,7 +15,7 @@ window.chart = undefined;
 // check if input is number
 function input_validate(input) {
     // +input will return NaN if not a number, but whitespace is considered 0 so we filter that out
-    return !isNaN(+input) && input.split(" ").join("") !== "";
+    return input !== null && !isNaN(+input) && input.split(" ").join("") !== "";
 }
 
 // line chart plotter        
@@ -116,4 +116,18 @@ function inv_normal_distribution_area_central(x, mean, std) {
     */
     const distance = mean - inv_normal_distribution_area_left((1 - x) / 2, mean, std)
     return [mean - distance, mean + distance];
+}
+
+/*
+    input via window.prompt()
+    conforms_to_specs should be a function
+    which returns true/false depending on
+    whether the input is in spec.
+*/
+function get_input(prompt, conforms_to_specs) {
+    let input = undefined;
+    while ((!conforms_to_specs(input) && input !== null) || input === undefined) {
+        input = window.prompt(prompt);
+    }
+    return input;
 }

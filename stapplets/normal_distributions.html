@@ -39,7 +39,7 @@
                 </div>
                 <div class="column">
                     <p>
-                        Adding these later.
+                        <a class="button button-outline" onclick="calculation_prompt()">Run Calculations</a>
                     </p>
                 </div>
             </div>
@@ -60,28 +60,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../common.js"></script>
-    <script>
-        // distribution plotter
-        function plot_distribution() {
-            // get values
-            const mean = $("#mean").val();
-            const sd = $("#sd").val();
-            // check if they're numbers
-            if (!input_validate(mean) || !input_validate(sd)) {
-                // just alert the user and don't plot anything
-                alert("At least one of your inputs is not a number.");
-                return;
-            }
-            // make sure SD is positive to prevent site from freezing
-            else if (+sd <= 0) {
-                // alert the user and don't plot anything
-                alert("Your standard deviation must be positive.");
-                return;
-            }
-            // now we can plot the line chart
-            plot_line_chart(generate_normal_chart(+mean, +sd));
-        }
-    </script>
+    <script src="./normal_distributions.js"></script>
 </body>
 
 </html>

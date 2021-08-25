@@ -1,9 +1,9 @@
 # Progress
 This is the progress board. You can check here periodically to see which stapplets are completed and which ones are still being made. Have fun!
 ## Completed
-N/A
+* Normal Distributions (might need more testing)
 ## In Progress
-* Normal Distributions
+N/A
 ## Not Started
 * 1 Categorical Variable, Single Group
 * 1 Categorical Variable
