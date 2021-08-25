@@ -1,5 +1,9 @@
 # Progress
 This is the progress board. You can check here periodically to see which stapplets are completed and which ones are still being made. Have fun!
+## TL;DR
+### Completed: 1/35, 2.86%
+### In Progress: 0/35, 0%
+### Not Started: 34/35, 97.14%
 ## Completed
 * Normal Distributions (might need more testing)
 ## In Progress
