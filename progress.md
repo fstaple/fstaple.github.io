@@ -1,5 +1,7 @@
 # Progress
 This is the progress board. You can check here periodically to see which stapplets are completed and which ones are still being made. Have fun!
+
+Note: Many of these are redirects to other applets. We are still figuring out which applets are redirects and which are actual applets.
 ## TL;DR
 ### Completed: 1/35, 2.86%
 ### In Progress: 0/35, 0%
