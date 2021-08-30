@@ -1,38 +1,41 @@
 // distribution plotter
 function plot_distribution() {
-    // get values
-    const mean = $("#mean").val();
-    const sd = $("#sd").val();
-    // check if they're numbers
-    if (!input_validate(mean) || !input_validate(sd)) {
-        // just alert the user and don't calculate anything
-        alert("At least one of your inputs is not a number.");
+    // get value
+    const dof = $("#dof").val();
+    // check if it's a number
+    if (!input_validate(dof)) {
+        // just alert the user and don't plot anything
+        alert("Your DOF is not a number.");
         return;
     }
-    // make sure SD is positive to prevent site from freezing
-    else if (+sd <= 0) {
-        // alert the user and don't calculate anything
-        alert("Your standard deviation must be positive.");
+    // make sure dof is >= 1 to prevent site from freezing
+    else if (+dof < 1) {
+        // alert the user and don't plot anything
+        alert("Your DOF must be over 1.");
         return;
     }
     // now we can plot the line chart
-    plot_line_chart(generate_chart_data(jStat.normal, +mean, +sd));
+    plot_line_chart(generate_chart_data(jStat.chisquare, +dof));
 }
 
 // prompt to calculate
 function calculation_prompt() {
-    // get mean and sd values
-    let mean = $("#mean").val();
-    let sd = $("#sd").val();
-    // check if they're numbers
-    if (!input_validate(mean) || !input_validate(sd)) {
-        // just alert the user and don't plot anything
-        alert("Your mean or standard deviation is not a number.");
+    // get value
+    let dof = $("#dof").val();
+    // check if it's a number
+    if (!input_validate(dof)) {
+        // just alert the user and don't calculate anything
+        alert("Your DOF is not a number.");
         return;
     }
-    // set them to numbers
-    mean = +mean;
-    sd = +sd;
+    // make sure dof is >= 1 to prevent site from freezing
+    else if (+dof < 1) {
+        // alert the user and don't calculate anything
+        alert("Your DOF must be over 1.");
+        return;
+    }
+    // set it to a number
+    dof = +dof;
     let input = null;
     // prompt the user to input which mode they want to enter
     input = get_input(`Which operation would you like to run?
@@ -73,11 +76,11 @@ Click cancel to cancel.`, (data_in) => data_in === "1" || data_in === "2" || dat
             let region_end = +split[1];
             // if we're calculating the area in between two values
             if (calculation === "1") {
-                alert(`Area (${region_start} to ${region_end}): ${normal_distribution_area_region(region_start, region_end, mean, sd) * 100}%`);
+                alert(`Area (${region_start} to ${region_end}): ${chi_square_area_region(region_start, region_end, dof) * 100}%`);
             }
             // if we're calculating the area outside of two values
             else if (calculation === "4") {
-                alert(`Area (outside of ${region_start} to ${region_end}): ${normal_distribution_area_outside_region(region_start, region_end, mean, sd) * 100}%`);
+                alert(`Area (outside of ${region_start} to ${region_end}): ${chi_square_area_outside_region(region_start, region_end, dof) * 100}%`);
             }
         }
         // for left-tail and right-tail area
@@ -90,11 +93,11 @@ Click cancel to cancel.`, (data_in) => data_in === "1" || data_in === "2" || dat
             input = +input;
             // if we're calculating the area to the left of a value
             if (calculation === "2") {
-                alert(`Area (to the left of ${input}): ${normal_distribution_area_left(input, mean, sd) * 100}%`);
+                alert(`Area (to the left of ${input}): ${chi_square_area_left(input, dof) * 100}%`);
             }
             // if we're calculating the area to the right of a value
             else {
-                alert(`Area (to the right of ${input}): ${normal_distribution_area_right(input, mean, sd) * 100}%`);
+                alert(`Area (to the right of ${input}): ${chi_square_area_right(input, dof) * 100}%`);
             }
         }
     }
@@ -118,16 +121,16 @@ Click cancel to cancel.`, (data_in) => data_in === "1" || data_in === "2" || dat
         input = +input;
         // if we're calculating the left-tail boundary value
         if (calculation === "1") {
-            alert(`Value (left-tail for area ${input}): ${inv_normal_distribution_area_left(input, mean, sd)}`);
+            alert(`Value (left-tail for area ${input}): ${inv_chi_square_area_left(input, dof)}`);
         }
         // if we're calculating the right-tail boundary value
         else if (calculation === "2") {
-            alert(`Value (right-tail for area ${input}): ${inv_normal_distribution_area_right(input, mean, sd)}`);
+            alert(`Value (right-tail for area ${input}): ${inv_chi_square_area_right(input, dof)}`);
         }
         // if we're calculating the central boundary value
         else {
             // we only want to calculate the central area once
-            let central_area = inv_normal_distribution_area_central(input, mean, sd);
+            let central_area = inv_chi_square_area_central(input, dof);
             alert(`Value (central for area ${input}): ${central_area[0]} <= x <= ${central_area[1]}`);
         }
     }

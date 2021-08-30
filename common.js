@@ -52,11 +52,11 @@ function plot_line_chart(data) {
     });
 }
 
-// normal distribution data generator
-function generate_normal_chart(mean, std) {
+// data generator
+function generate_chart_data(distribution, ...dist_params) {
     // make the width nice 
-    const low = Math.floor(jStat.normal.inv(0.001, mean, std));
-    const high = Math.ceil(jStat.normal.inv(0.999, mean, std));
+    const low = Math.floor(distribution.inv(0.001, ...dist_params));
+    const high = Math.ceil(distribution.inv(0.999, ...dist_params));
     // calculate our step
     const step = (high - low) / 200;
     // this is where we store our data
@@ -65,7 +65,7 @@ function generate_normal_chart(mean, std) {
     for (let i = low; i <= high; i += step) {
         data_array.push({
             x: i,
-            y: jStat.normal.pdf(i, mean, std)
+            y: distribution.pdf(i, ...dist_params)
         });
     }
     // return the array
@@ -81,7 +81,7 @@ function normal_distribution_area_right(x, mean, std) {
 }
 
 function normal_distribution_area_region(a, b, mean, std) {
-    // for the area in a region, we subtract the area to the left of the leftmost point from the area to the right of the rightmost point
+    // for the area in a region, we subtract the area to the left of the leftmost point from the area to the left of the rightmost point
     return normal_distribution_area_left(b, mean, std) - normal_distribution_area_left(a, mean, std);
 }
 
@@ -130,4 +130,42 @@ function get_input(prompt, conforms_to_specs) {
         input = window.prompt(prompt);
     }
     return input;
+}
+
+// various chi-square area functions
+const chi_square_area_left = jStat.chisquare.cdf;
+
+function chi_square_area_right(x, dof) {
+    // for the area on the right, we just return the area not on the left
+    return 1 - chi_square_area_left(x, dof);
+}
+
+function chi_square_area_region(a, b, dof) {
+    // for the area in a region, we subtract the area to the left of the leftmost point from the area to the left of the rightmost point
+    return chi_square_area_left(b, dof) - chi_square_area_left(a, dof);
+}
+
+function chi_square_area_outside_region(a, b, dof) {
+    // to find the area outside of a region, we add the area to the right of the rightmost point to the area to the left of the leftmost point
+    return chi_square_area_right(b, dof) + chi_square_area_left(a, dof);
+}
+
+const inv_chi_square_area_left = jStat.chisquare.inv;
+
+function inv_chi_square_area_right(x, dof) {
+    // to find the boundary value for a right-tail area of x, we just find the boundary value for a left-tail area of 1 minus x
+    return inv_chi_square_area_left(1 - x, dof);
+}
+
+function inv_chi_square_area_central(x, dof) {
+    /*
+        haha finding boundaries go brr
+        right tail of 1/2 the area, left tail of half the area.
+        does that make sense? good.
+
+        (chi-square doesn't have to be symmetric)
+    */
+    // area on both right and left tail
+    let area = (1 - x) / 2;
+    return [inv_chi_square_area_left(area, dof), inv_chi_square_area_right(area, dof)];
 }
