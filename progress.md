@@ -4,13 +4,13 @@ This is the progress board. You can check here periodically to see which stapple
 Note: Many of these are redirects to other applets. We are still figuring out which applets are redirects and which are actual applets.
 ## TL;DR
 ### Completed: 2/35, 5.72%
-### In Progress: 0/35, 0%
+### In Progress: 1/35, 2.86%
 ### Not Started: 33/35, 94.28%
 ## Completed
 * Normal Distributions
 * Chi-Squared Distributions
 ## In Progress
-N/A
+* t Distributions
 ## Not Started
 * 1 Categorical Variable, Single Group
 * 1 Categorical Variable
