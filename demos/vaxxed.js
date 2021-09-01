@@ -2,7 +2,7 @@
     fstaple // free statistics for everyone
 
     We won't be using jStat here.
-    All of the data here was pre-calculated by Steve Cox (@stevecox).
+    All of the data here was pre-calculated by Steve Cox (@realstevecox).
 */
 
 // data. it's much too large to actually be pretty. sorry
