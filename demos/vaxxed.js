@@ -16,8 +16,8 @@ window.chart = undefined;
 const get_chart_color = () => `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`;
 let border_colors = [];
 let background_colors = [];
-for (let i = 0; i < 16; i++) border_colors.push(get_chart_color());
-for (let i = 0; i < 16; i++) background_colors.push(border_colors[i].replace("rgb", "rgba").replace(")", ", 0.2)"));
+for (let i = 0; i < 12; i++) border_colors.push(get_chart_color());
+for (let i = 0; i < 12; i++) background_colors.push(border_colors[i].replace("rgb", "rgba").replace(")", ", 0.2)"));
 
 // getting data
 // dataset: one of infections, hospitalizations, deaths, pct. unvax
