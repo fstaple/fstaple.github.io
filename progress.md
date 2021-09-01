@@ -9,8 +9,10 @@ Note: Many of these are redirects to other applets. We are still figuring out wh
 ## Completed
 * Normal Distributions
 * Chi-Squared Distributions
+
 ## In Progress
 * t Distributions
+
 ## Not Started
 * 1 Categorical Variable, Single Group
 * 1 Categorical Variable
@@ -46,6 +48,7 @@ Note: Many of these are redirects to other applets. We are still figuring out wh
 * Chi-square homogeneity
 * Chi-square independence
 * ANOVA (just a redirect to 1 quantitative variable, multiple groups)
+
 ## Not Planned
 * Activities
 * Any collaborative applets
