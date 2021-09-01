@@ -3,9 +3,9 @@ This is the progress board. You can check here periodically to see which stapple
 
 Note: Many of these are redirects to other applets. We are still figuring out which applets are redirects and which are actual applets.
 ## TL;DR
-### Completed: 2/35, 5.72%
-### In Progress: 1/35, 2.86%
-### Not Started: 33/35, 94.28%
+### Completed: 2/34, 5.88%
+### In Progress: 1/34, 2.94%
+### Not Started: 31/34, 91.18%
 ## Completed
 * Normal Distributions
 * Chi-Squared Distributions
