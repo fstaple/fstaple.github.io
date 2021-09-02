@@ -32,10 +32,13 @@ body {
     height: 100%;
     width: 100%;
 }
+
+/* vaxxed */
 .hwmin {
     width: 100%;
-    height: 25vw;
+    height: 50vh;
 }
+
 
 .chart-container {
     position: relative;
