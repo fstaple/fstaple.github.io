@@ -91,8 +91,8 @@ function plot_bar_charts() {
                 data: vaccinated_data
             });
             datasets.push({
-                borderColor: border_colors[j * 2],
-                backgroundColor: background_colors[j * 2],
+                borderColor: border_colors[(j * 2) + 1],
+                backgroundColor: background_colors[(j * 2) + 1],
                 label: `Week ${j + 1} Unvaccinated`,
                 borderWidth: 1,
                 data: unvaccinated_data
