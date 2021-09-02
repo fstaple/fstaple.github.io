@@ -16,8 +16,8 @@ window.chart = undefined;
 const get_chart_color = () => `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`;
 let border_colors = [];
 let background_colors = [];
-for (let i = 0; i < 12; i++) border_colors.push(get_chart_color());
-for (let i = 0; i < 12; i++) background_colors.push(border_colors[i].replace("rgb", "rgba").replace(")", ", 0.2)"));
+for (let i = 0; i < 16; i++) border_colors.push(get_chart_color());
+for (let i = 0; i < 16; i++) background_colors.push(border_colors[i].replace("rgb", "rgba").replace(")", ", 0.2)"));
 
 // getting data
 // dataset: one of infections, hospitalizations, deaths, pct. unvax
@@ -43,7 +43,7 @@ function get_data(population, week, dataset, type) {
 // oh my god it's a barchart it's so good wow!!!
 let chart = [];
 
-function plot_bar_chart(data, chartnum, label, labels) {
+function plot_bar_chart(datasets, chartnum, labels) {
     let chart_ref = chart[chartnum - 1];
     if (chart_ref !== null && chart_ref !== undefined) chart_ref.destroy();
     window.ctx = document.getElementById(`chart${chartnum}`);
@@ -51,19 +51,17 @@ function plot_bar_chart(data, chartnum, label, labels) {
         type: "bar",
         data: {
             labels,
-            datasets: [{
-                borderColor: border_colors,
-                backgroundColor: background_colors,
-                label,
-                data,
-                borderWidth: 1
-            }]
+            datasets
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
+                x: {
+                    stacked: true
+                },
                 y: {
+                    stacked: true,
                     beginAtZero: true
                 }
             }
@@ -72,30 +70,36 @@ function plot_bar_chart(data, chartnum, label, labels) {
 }
 
 // wow!!! chart!!! wow!!! chart!!! wow!!! chart!!!
-function plot_bar_charts(week) {
-    // first let's get our labels
-    let labels = [];
-    for (let i = 0; i < 6; i++) {
-        labels.push(`${populations[i]}`);
-    }
-    // chart labels (what charts are)
-    let chart_labels = ["Infections", "Hospitalizations", "Deaths", "Pct. Unvax"];
-    // for each chart
-    for (let i = 0; i < 4; i++) {
-        let chart_data = [];
-        for (let j = 0; j < 6; j++) {
-            chart_data.push(get_data(populations[j], week, chart_labels[i], "total"));
+function plot_bar_charts() {
+    // for each dataset
+    let dataset_names = ["infections", "hospitalizations", "deaths"];
+    for (let i = 0; i < 3; i++) {
+        let labels = [...populations];
+        let datasets = [];
+        for (let j = 0; j < 8; j++) {
+            let vaccinated_data = [];
+            let unvaccinated_data = [];
+            for (let k = 0; k < 6; k++) {
+                vaccinated_data.push(get_data(populations[k], j, dataset_names[i], "vaccinated"));
+                unvaccinated_data.push(get_data(populations[k], j, dataset_names[i], "unvaccinated"));
+            }
+            datasets.push({
+                borderColor: border_colors[j * 2],
+                backgroundColor: background_colors[j * 2],
+                label: `Week ${j + 1} Vaccinated`,
+                borderWidth: 1,
+                data: vaccinated_data
+            });
+            datasets.push({
+                borderColor: border_colors[j * 2],
+                backgroundColor: background_colors[j * 2],
+                label: `Week ${j + 1} Unvaccinated`,
+                borderWidth: 1,
+                data: unvaccinated_data
+            });
         }
-        plot_bar_chart(chart_data, i + 1, chart_labels[i], labels);
+        plot_bar_chart(datasets, i + 1, labels);
     }
 }
 
-let week = -1;
-function advance_week() {
-    week++;
-    week = week % 8;
-    $("#week").text(`Week ${week + 1}`);
-    plot_bar_charts(week);
-}
-
-advance_week();
+plot_bar_charts();

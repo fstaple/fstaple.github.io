@@ -39,44 +39,24 @@
                         Vaccination rates: A - 0%, B - 38%, C - 65%, D - 80%, E - 90%, F - 99%
                     </p>
                 </div>
-                <div class="column">
-                    <p>
-                        There are 8 weeks in the simulation.<br>
-                        <span id="week">Make sure your JavaScript is enabled.</span><br>
-                        <a class="button button-outline" onclick="advance_week()">Next Week</a>
-                    </p>
-                </div>
             </div>
         </div>
         <!-- body -->
         <div class="flex-content">
-            <div class="row">
-                <div class="column">
-                    <!-- chart -->
-                    <div class="chart-container hw100">
-                        <canvas id="chart1"></canvas>
-                    </div>
-                </div>
-                <div class="column">
-                    <!-- chart -->
-                    <div class="chart-container hw100">
-                        <canvas id="chart2"></canvas>
-                    </div>
-                </div>
+            <!-- chart -->
+            <h3 class="center">Infections</h3>
+            <div class="chart-container hwmin">
+                <canvas id="chart1"></canvas>
             </div>
-            <div class="row">
-                <div class="column">
-                    <!-- chart -->
-                    <div class="chart-container hw100">
-                        <canvas id="chart3"></canvas>
-                    </div>
-                </div>
-                <div class="column">
-                    <!-- chart -->
-                    <div class="chart-container hw100">
-                        <canvas id="chart4"></canvas>
-                    </div>
-                </div>
+            <!-- chart -->
+            <h3 class="center">Hospitalizations</h3>
+            <div class="chart-container hwmin">
+                <canvas id="chart2"></canvas>
+            </div>
+            <!-- chart -->
+            <h3 class="center">Deaths</h3>
+            <div class="chart-container hwmin">
+                <canvas id="chart3"></canvas>
             </div>
         </div>
     </div>
