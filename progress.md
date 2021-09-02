@@ -24,7 +24,6 @@ Note: Many of these are redirects to other applets. We are still figuring out wh
 * Discrete Random Variables
 * Binomial Distributions
 * t Distributions
-* Chi-squared Distributions
 * Streakiness
 * Testing a percentage/proportion/count
 * Testing a difference in percentages/proportions
